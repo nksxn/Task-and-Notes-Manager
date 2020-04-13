@@ -6,7 +6,8 @@ const route = Router();
 
 route.get("/", async (req, res) => {
   const tasks = await Tasks.findAll();
-  res.send(todos);
+  console.log("chl gya");
+  res.send(tasks);
 });
 
 route.get("/:id", async (req, res) => {
@@ -80,17 +81,17 @@ route.post("/", async (req, res) => {
       error: "Task description not provided",
     });
   }
-  if (req.body.dueDate !== "string") {
+  if (typeof req.body.dueDate !== "string") {
     return res.status(400).send({
       error: "Due date not provided",
     });
   }
-  if (req.body.status !== "string") {
+  if (typeof req.body.status !== "string") {
     return res.status(400).send({
       error: "Task status not provided",
     });
   }
-  if (req.body.priority !== "string") {
+  if (typeof req.body.priority !== "string") {
     return res.status(400).send({
       error: "Task priority not provided",
     });
@@ -99,7 +100,7 @@ route.post("/", async (req, res) => {
   const newTask = await Tasks.create({
     title: req.body.title,
     description: req.body.description,
-    dueDate: Date.parse(req.body.dueDate),
+    dueDate: req.body.dueDate,
     status: req.body.status,
     priority: req.body.priority,
   });

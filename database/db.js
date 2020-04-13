@@ -49,10 +49,12 @@ Tasks.hasMany(Notes, {
 });
 Notes.belongsTo(Tasks);
 
-db.sync()
-  .then(() => {
-    console.log("db works");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// db.sync()
+//   .then(() => {
+//     console.log("db works");
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+module.exports = { db, Tasks, Notes };
