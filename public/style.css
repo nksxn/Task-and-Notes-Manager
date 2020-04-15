@@ -1,0 +1,38 @@
+.task-input {
+  width: 45vw;
+  margin-top: 15vh;
+  background-color: #ffffff;
+  max-height: 65vh;
+  padding: 30px;
+  border-radius: 25px;
+}
+#background-curtain,
+#background-curtain-edit {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+}
+
+.form-heading {
+  text-align: center;
+  padding: 10px;
+  color: whitesmoke;
+  background-color: black;
+  border-radius: 3px;
+}
+.input-group-text {
+  min-width: 89px;
+  text-align: center;
+}
+td span:nth-child(2) {
+  margin-left: 20px;
+}
+svg {
+  height: 16px;
+}

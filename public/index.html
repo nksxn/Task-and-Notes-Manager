@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task and Notes Manager</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script async src="script.js"></script>
+  </head>
+  <body>
+    <div id="heading">
+      <h1 id="main-heading">Task and Notes Manager</h1>
+    </div>
+    <button type="button" class="btn btn-success" id="add-new-task-btn">
+      Add a New Task
+    </button>
+    <div id="output">
+      <h3 id="output-heading">Task List</h3>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div id="background-curtain" class="d-none">
+      <div class="task-input col-4" id="task-input">
+        <h3 class="form-heading">New Task Details</h3>
+        <form name="addNewTask">
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="title-prepend">Title</span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                id="title"
+                placeholder="Title"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="description-prepend"
+                  >Description</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="due-date-prepend"
+                  >Due Date</span
+                >
+              </div>
+              <input
+                type="date"
+                class="form-control"
+                name="dueDate"
+                id="dueDate"
+                placeholder="Due Date"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="status">Status</label>
+              </div>
+              <select class="custom-select" name="status" id="status" required>
+                <option selected>Choose...</option>
+                <option value="incomplete">Incomplete</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="priority">Priority</label>
+              </div>
+              <select
+                class="custom-select"
+                id="priority"
+                name="priority"
+                required
+              >
+                <option selected>Choose...</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"></div>
+
+          <button type="button" class="btn btn-success" id="add-btn">
+            Add
+          </button>
+          <button type="reset" class="btn btn-danger" id="reset-btn">
+            Reset
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="background-curtain-edit" class="d-none">
+      <div class="task-input col-4" id="task-edit">
+        <h3 class="form-heading">Edit Task Details</h3>
+        <form name="editTask">
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="title-prepend">Title</span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                id="title"
+                placeholder="Title"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="description-prepend"
+                  >Description</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="description"
+                placeholder="Description"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="due-date-prepend"
+                  >Due Date</span
+                >
+              </div>
+              <input
+                type="date"
+                class="form-control"
+                name="dueDate"
+                id="dueDate"
+                placeholder="Due Date"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="status">Status</label>
+              </div>
+              <select class="custom-select" name="status" id="status" required>
+                <option selected>Choose...</option>
+                <option value="incomplete">Incomplete</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="priority">Priority</label>
+              </div>
+              <select
+                class="custom-select"
+                id="priority"
+                name="priority"
+                required
+              >
+                <option selected>Choose...</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"></div>
+
+          <button type="button" class="btn btn-success" id="edit-btn">
+            Edit
+          </button>
+          <button type="reset" class="btn btn-danger" id="reset-btn">
+            Reset
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
