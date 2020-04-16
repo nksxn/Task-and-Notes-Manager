@@ -1,13 +1,39 @@
+#main-container {
+  padding: 3vh;
+}
+
+#output {
+  margin-top: 2vh;
+}
+
+#main-heading {
+  text-align: center;
+  text-decoration-line: underline;
+  padding: 3vh;
+}
+
 .task-input {
-  width: 45vw;
+  width: 50vw;
   margin-top: 15vh;
   background-color: #ffffff;
   max-height: 65vh;
   padding: 30px;
   border-radius: 25px;
 }
+
+#particularTaskContainer {
+  width: 50vw;
+  margin-top: 10vh;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  max-height: 80vh;
+  padding: 20px;
+  border-radius: 25px;
+}
+
 #background-curtain,
-#background-curtain-edit {
+#background-curtain-edit,
+#background-curtain-note {
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -19,12 +45,28 @@
   justify-content: center;
 }
 
+.sort {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#mainTable tbody tr {
+  cursor: pointer;
+}
 .form-heading {
   text-align: center;
   padding: 10px;
   color: whitesmoke;
-  background-color: black;
+  background-color: #343a40;
   border-radius: 3px;
+}
+#note-add {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+#note-existing {
+  margin-top: 5vh;
 }
 .input-group-text {
   min-width: 89px;
@@ -35,4 +77,8 @@ td span:nth-child(2) {
 }
 svg {
   height: 16px;
+}
+
+#background-curtain-note {
+  flex-direction: column;
 }

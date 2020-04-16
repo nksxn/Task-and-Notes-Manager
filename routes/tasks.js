@@ -27,7 +27,7 @@ route.get("/:id", async (req, res) => {
 });
 
 route.get("/:id/notes", async (req, res) => {
-  if (isNaN(Number(req.param.id))) {
+  if (isNaN(Number(req.params.id))) {
     return res.status(400).send({
       error: "Task id must be an Integer",
     });
@@ -132,8 +132,8 @@ route.delete("/:id", async (req, res) => {
     .send({ success: "Task with id = " + req.params.id + " deleted." });
 });
 
-route.delete("/:id/notes", async (req, res) => {
-  await Notes.destroy({ where: { taskId: req.params.id } });
+route.delete("/notes/:id", async (req, res) => {
+  await Notes.destroy({ where: { id: req.params.id } });
   res
     .status(204)
     .send({ success: "Notes with task id = " + req.params.id + " deleted." });

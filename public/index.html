@@ -9,215 +9,350 @@
     <script async src="script.js"></script>
   </head>
   <body>
-    <div id="heading">
-      <h1 id="main-heading">Task and Notes Manager</h1>
-    </div>
-    <button type="button" class="btn btn-success" id="add-new-task-btn">
-      Add a New Task
-    </button>
-    <div id="output">
-      <h3 id="output-heading">Task List</h3>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Status</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-    <div id="background-curtain" class="d-none">
-      <div class="task-input col-4" id="task-input">
-        <h3 class="form-heading">New Task Details</h3>
-        <form name="addNewTask">
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="title-prepend">Title</span>
-              </div>
-              <input
-                type="text"
-                class="form-control"
-                name="title"
-                id="title"
-                placeholder="Title"
-                required
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="description-prepend"
-                  >Description</span
-                >
-              </div>
-              <input
-                type="text"
-                class="form-control"
-                name="description"
-                id="description"
-                placeholder="Description"
-                required
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="due-date-prepend"
-                  >Due Date</span
-                >
-              </div>
-              <input
-                type="date"
-                class="form-control"
-                name="dueDate"
-                id="dueDate"
-                placeholder="Due Date"
-                required
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="status">Status</label>
-              </div>
-              <select class="custom-select" name="status" id="status" required>
-                <option selected>Choose...</option>
-                <option value="incomplete">Incomplete</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="priority">Priority</label>
-              </div>
-              <select
-                class="custom-select"
-                id="priority"
-                name="priority"
-                required
-              >
-                <option selected>Choose...</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group"></div>
-
-          <button type="button" class="btn btn-success" id="add-btn">
-            Add
-          </button>
-          <button type="reset" class="btn btn-danger" id="reset-btn">
-            Reset
-          </button>
-        </form>
+    <div id="main-container">
+      <div id="heading">
+        <h1 id="main-heading">Task and Notes Manager</h1>
       </div>
-    </div>
-    <div id="background-curtain-edit" class="d-none">
-      <div class="task-input col-4" id="task-edit">
-        <h3 class="form-heading">Edit Task Details</h3>
-        <form name="editTask">
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="title-prepend">Title</span>
+      <button type="button" class="btn btn-success" id="add-new-task-btn">
+        Add a New Task
+      </button>
+      <div id="output">
+        <h3 id="output-heading">Task List</h3>
+        <table class="table" id="mainTable">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">
+                Due Date<span class="sort" id="sort-by-dueDate"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="sort"
+                    class="svg-inline--fa fa-sort fa-w-10"
+                    role="img"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th scope="col">
+                Status<span class="sort" id="sort-by-status"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="sort"
+                    class="svg-inline--fa fa-sort fa-w-10"
+                    role="img"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th scope="col">
+                Priority<span class="sort" id="sort-by-priority"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="sort"
+                    class="svg-inline--fa fa-sort fa-w-10"
+                    role="img"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                    />
+                  </svg>
+                </span>
+              </th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div id="background-curtain" class="d-none">
+        <div class="task-input col-4" id="task-input">
+          <h3 class="form-heading">New Task Details</h3>
+          <form name="addNewTask">
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="title-prepend">Title</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  id="title"
+                  placeholder="Title"
+                  required
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                name="title"
-                id="title"
-                placeholder="Title"
-                required
-              />
             </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="description-prepend"
-                  >Description</span
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="description-prepend"
+                    >Description</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  id="description"
+                  placeholder="Description"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="due-date-prepend"
+                    >Due Date</span
+                  >
+                </div>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="dueDate"
+                  id="dueDate"
+                  placeholder="Due Date"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="status">Status</label>
+                </div>
+                <select
+                  class="custom-select"
+                  name="status"
+                  id="status"
+                  required
                 >
+                  <option selected>Choose...</option>
+                  <option value="incomplete">Incomplete</option>
+                  <option value="completed">Completed</option>
+                </select>
               </div>
-              <input
-                type="text"
-                class="form-control"
-                name="description"
-                id="description"
-                placeholder="Description"
-                required
-              />
             </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="due-date-prepend"
-                  >Due Date</span
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="priority"
+                    >Priority</label
+                  >
+                </div>
+                <select
+                  class="custom-select"
+                  id="priority"
+                  name="priority"
+                  required
                 >
+                  <option selected>Choose...</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
               </div>
-              <input
-                type="date"
-                class="form-control"
-                name="dueDate"
-                id="dueDate"
-                placeholder="Due Date"
-                required
-              />
             </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="status">Status</label>
-              </div>
-              <select class="custom-select" name="status" id="status" required>
-                <option selected>Choose...</option>
-                <option value="incomplete">Incomplete</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="priority">Priority</label>
-              </div>
-              <select
-                class="custom-select"
-                id="priority"
-                name="priority"
-                required
-              >
-                <option selected>Choose...</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group"></div>
+            <div class="form-group"></div>
 
-          <button type="button" class="btn btn-success" id="edit-btn">
-            Edit
-          </button>
-          <button type="reset" class="btn btn-danger" id="reset-btn">
-            Reset
-          </button>
-        </form>
+            <button type="button" class="btn btn-success" id="add-btn">
+              Add
+            </button>
+            <button type="reset" class="btn btn-danger" id="reset-btn">
+              Reset
+            </button>
+          </form>
+        </div>
+      </div>
+      <div id="background-curtain-edit" class="d-none">
+        <div class="task-input col-4" id="task-edit">
+          <h3 class="form-heading">Edit Task Details</h3>
+          <form name="editTask">
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="title-prepend">Title</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  id="title"
+                  placeholder="Title"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="description-prepend"
+                    >Description</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  id="description"
+                  placeholder="Description"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="due-date-prepend"
+                    >Due Date</span
+                  >
+                </div>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="dueDate"
+                  id="dueDate"
+                  placeholder="Due Date"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="status">Status</label>
+                </div>
+                <select
+                  class="custom-select"
+                  name="status"
+                  id="status"
+                  required
+                >
+                  <option selected>Choose...</option>
+                  <option value="incomplete">Incomplete</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="priority"
+                    >Priority</label
+                  >
+                </div>
+                <select
+                  class="custom-select"
+                  id="priority"
+                  name="priority"
+                  required
+                >
+                  <option selected>Choose...</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group"></div>
+
+            <button type="button" class="btn btn-success" id="edit-btn">
+              Edit
+            </button>
+            <button type="reset" class="btn btn-danger" id="reset-btn">
+              Reset
+            </button>
+          </form>
+        </div>
+      </div>
+      <div id="background-curtain-note" class="d-none flex-row">
+        <div id="particularTaskContainer">
+          <div id="clickedTaskHeader">
+            <div id="particularTask">
+              <table class="table" style="min-height: 10vh;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Priority</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyOfParticularTask"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="note-add" id="note-add">
+            <fieldset>
+              <legend>Add New Note</legend>
+              <form name="addNewNote">
+                <div class="form-group">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="due-date-prepend"
+                        >Description</span
+                      >
+                      <input
+                        type="text"
+                        class="form-control md-3"
+                        name="descriptionOfNote"
+                        id="descriptionOfNote"
+                        placeholder="Description"
+                        maxlength="255"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-success" id="add-note-btn">
+                  Add Note
+                </button>
+                <button type="reset" class="btn btn-danger" id="reset-btn">
+                  Reset
+                </button>
+              </form>
+            </fieldset>
+          </div>
+          <div class="note-existing" id="note-existing">
+            <h4 class="form-heading">Notes</h4>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyForNotes"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </body>
