@@ -7,6 +7,9 @@
     "start": "node ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engine": {
+    "node": "12.16.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nksxn/Task-and-Notes-Manager.git"
