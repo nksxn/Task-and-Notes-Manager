@@ -64,7 +64,6 @@ function addRowHandlers() {
         tbodyOfParticularTask.innerHTML = "";
         tbodyForNotes.innerHTML = "";
         showNotes(id);
-        alert("id:" + id);
       };
     };
     currentRow.onclick = createClickHandler(currentRow);
@@ -79,7 +78,6 @@ function editTr(e) {
   else if (span.tagName == "path")
     tr = span.parentNode.parentNode.parentNode.parentNode;
   else tr = span.parentNode.parentNode;
-  console.log("editTR");
   showEditForm(tr);
 }
 
@@ -191,7 +189,6 @@ async function showNotes(id) {
 
   taskid = id;
   let task = await getParticularTask(id);
-  console.log(task);
   let keys = ["id", "title", "description", "dueDate", "status", "priority"];
   let tr = document.createElement("tr");
   let ctr = tbodyOfParticularTask.appendChild(tr);
@@ -202,7 +199,6 @@ async function showNotes(id) {
   });
 
   let notes = await getAllNotes(id);
-  console.log(notes);
   notes.forEach((element) => {
     let keys = ["id", "description"];
     let tr = document.createElement("tr");
@@ -224,10 +220,7 @@ async function showNotes(id) {
 }
 
 async function showAllNotes(id) {
-  console.log("showAllNotes");
-  console.log(id);
   let notes = await getAllNotes(id);
-  console.log(notes);
   notes.forEach((element) => {
     let keys = ["id", "description"];
     let tr = document.createElement("tr");
@@ -256,9 +249,6 @@ function deleteNoteTr(e) {
     tr = span.parentNode.parentNode.parentNode.parentNode;
   else tr = span.parentNode.parentNode;
   id = tr.children[0].textContent;
-  console.log("ye print hua");
-  console.log(tr.children);
-  console.log(id);
   deleteNote(id);
 }
 
